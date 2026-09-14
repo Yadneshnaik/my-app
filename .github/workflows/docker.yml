@@ -22,12 +22,11 @@ jobs:
         uses: docker/login-action@v4
         with:
           username: yadneshnaik
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.dckr_pat_nNhYRs5NNTyhj8C7LPvhV2rGy5U }}
 
       - name: Build and Push Docker Image
-        if: github.event_name == 'push'
         uses: docker/build-push-action@v7
         with:
           context: .
-          push: true
+          push: ${{ github.event_name == 'push' }}
           tags: yadneshnaik/my-app:latest
